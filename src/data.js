@@ -24,23 +24,67 @@ export async function process5DayWeatherData(location) {
   let data = await fetch5DayWeather(location);
   console.log("5 day", data);
   console.log("5 day", data.list);
-  let dateStr = data.list[2].dt_txt.slice(0, 10);
+
+  let hourlydata = {};
+  let currentDate = data.list[0].dt_txt.slice(0, 10);
+  let count = 1;
+  let hourlyWeatherData = {};
+  hourlyWeatherData["day" + count] = {};
+  console.log("current date", currentDate);
   data.list.forEach((elem) => {
-    if (dateStr === elem.dt_txt.slice(0, 10))
-      console.log(elem.dt_txt.slice(0, 10));
+    // hourlydata = {
+    //   time: elem.dt_txt.slice(11),
+    //   date: elem.dt_txt.slice(0, 10),
+    //   icon: elem.weather[0].icon,
+    //   skies: elem.weather[0].main,
+    //   temp: elem.main.temp,
+    //   feelsLike: elem.main.feels_like,
+    //   tempMin: elem.main.temp_min,
+    //   tempMax: elem.main.temp_max,
+    //   humidity: elem.main.humidity + "%",
+    //   precipitation:
+    //     (elem.main.pop ? Math.trunc(elem.main.pop * 100) : 0) + "%",
+    // };
+    console.log("weather data", hourlyWeatherData);
+    if (currentDate === elem.dt_txt.slice(0, 10)) {
+      hourlyWeatherData["day" + count][elem.dt_txt.slice(11)] = {
+        time: elem.dt_txt.slice(11),
+        date: elem.dt_txt.slice(0, 10),
+        icon: elem.weather[0].icon,
+        skies: elem.weather[0].main,
+        temp: elem.main.temp,
+        feelsLike: elem.main.feels_like,
+        tempMin: elem.main.temp_min,
+        tempMax: elem.main.temp_max,
+        humidity: elem.main.humidity + "%",
+        precipitation:
+          (elem.main.pop ? Math.trunc(elem.main.pop * 100) : 0) + "%",
+      };
+    } else {
+      //push new day
+      count++;
+      hourlyWeatherData["day" + count] = {};
+    }
+
+    console.log(currentDate);
+    currentDate = elem.dt_txt.slice(0, 10);
+    console.log(currentDate);
+    console.log(hourlydata);
   });
 
-  let noonData = [];
-  for (let i = 0; i < data.list.length; i += 8) {
-    noonData.push(data.list[i]);
-  }
-  console.log("noon", noonData);
-  let morningData = [];
-  for (let i = 0; i < data.list.length; i += 8) {
-    morningData.push(data.list[i]);
-  }
+  console.log(hourlyWeatherData);
 
-  console.log("morning", morningData);
-  let forecast = {};
-  console.log(forecast);
+  // let noonData = [];
+  // for (let i = 0; i < data.list.length; i += 8) {
+  //   noonData.push(data.list[i]);
+  // }
+  // console.log("noon", noonData);
+  // let morningData = [];
+  // for (let i = 0; i < data.list.length; i += 8) {
+  //   morningData.push(data.list[i]);
+  // }
+
+  // console.log("morning", morningData);
+  // let forecast = {};
+  // console.log(forecast);
 }
