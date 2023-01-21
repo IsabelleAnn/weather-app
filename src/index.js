@@ -1,5 +1,5 @@
 import "./style.css";
-import { processCurrentWeatherData, process5DayWeatherData } from "./data.js";
+import { processCurrentWeatherData, get5DayForecast } from "./data.js";
 
 processCurrentWeatherData("austin, tx, us");
-process5DayWeatherData("austin, tx, us");
+get5DayForecast("austin, tx, us");
