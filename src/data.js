@@ -1,30 +1,88 @@
 import { format } from "date-fns";
 import { fetchCurrentWeather, fetch5DayWeather } from "./apiCalls.js";
 
-export async function processCurrentWeatherData(location) {
-  let data = await fetchCurrentWeather(location);
-  console.log("current data", data);
+export async function get5DayForecast(location) {
+  try {
+    let data = await fetch5DayWeather(location);
+    console.log("5 day data", data);
+    let forecast = processWeatherData(data);
+    return forecast;
+  } catch (error) {
+    console.log(error);
+    return "Location not found - get5Day";
+  }
+}
+
+export async function getCurrentForecast(location) {
+  try {
+    let data = await fetchCurrentWeather(location);
+    console.log("current data", data);
+    let forecast = processWeatherData(data);
+    return forecast;
+  } catch (error) {
+    console.log(error);
+    return "Location not found - get current";
+  }
+}
+
+function processWeatherData(data) {
+  if (data.hasOwnProperty("list")) {
+    let currentDate = data.list[0].dt_txt.slice(0, 10);
+    let countDays = 1;
+    let countHrs = 0;
+    let hourlyWeatherData = {
+      location: data.city.name + ", " + data.city.country,
+    };
+    let dayTitle = "day";
+    hourlyWeatherData[dayTitle + countDays] = {};
+
+    data.list.forEach((hour) => {
+      let nextDate = hour.dt_txt.slice(0, 10);
+      if (currentDate !== nextDate) {
+        countDays++;
+        countHrs = 0;
+        hourlyWeatherData[dayTitle + countDays] = {};
+      }
+      hourlyWeatherData[dayTitle + countDays][countHrs] = new WeatherData(hour);
+      countHrs++;
+      currentDate = nextDate;
+    });
+    console.log("my hourly forecast:", hourlyWeatherData);
+    return hourlyWeatherData;
+  }
 
   let currentWeather = new WeatherData(data);
-  // let currentWeather = {
-  //   time: formatTime(getTimeStamp(data)),
-  //   date: formatDate(getTimeStamp(data)),
-  //   icon: data.weather[0].icon,
-  //   skies: data.weather[0].main,
-  //   temp: data.main.temp,
-  //   feelsLike: data.main.feels_like,
-  //   tempMin: data.main.temp_min,
-  //   tempMax: data.main.temp_max,
-  //   humidity: data.main.humidity + "%",
-  //   precipitation: (data.main.pop ? Math.trunc(data.main.pop * 100) : 0) + "%",
-  // };
+  currentWeather.location = data.name + ", " + data.sys.country;
 
-  let processedData = console.log("current", currentWeather);
+  console.log("my current forecast:", currentWeather);
+
   return currentWeather;
 }
 
-function processData(data) {
-  if (data.hasOwnProperty("list")) {
+class WeatherData {
+  constructor(data) {
+    let imperial = {
+      temp: data.main.temp,
+      feelsLike: data.main.feels_like,
+      tempMin: data.main.temp_min,
+      tempMax: data.main.temp_max,
+    };
+    let metric = {};
+    for (const temp in imperial) {
+      imperial[temp] = Math.trunc(imperial[temp]);
+      metric[temp] = Math.trunc(convertFtoC(imperial[temp]));
+    }
+
+    this.temps = {
+      imperial,
+      metric,
+    };
+    this.time = formatTime(getTimeStamp(data));
+    this.date = formatDate(getTimeStamp(data));
+    this.icon = data.weather[0].icon;
+    this.skies = data.weather[0].main;
+    this.humidity = data.main.humidity + "%";
+    this.precipitation = (data.pop ? Math.trunc(data.pop * 100) : 0) + "%";
   }
 }
 
@@ -43,97 +101,6 @@ function formatTime(time) {
   return format(time * 1000, "p");
 }
 
-class WeatherData {
-  constructor(data) {
-    if (data.hasOwnProperty("list")) {
-      this.time = formatTime(getTimeStamp(data.list));
-      this.date = formatDate(getTimeStamp(data.list));
-      this.icon = data.list.weather[0].icon;
-      this.skies = data.list.weather[0].main;
-      this.temp = data.list.main.temp;
-      this.feelsLike = data.list.main.feels_like;
-      this.tempMin = data.list.main.temp_min;
-      this.tempMax = data.list.main.temp_max;
-      this.humidity = data.list.main.humidity + "%";
-      this.precipitation = data.list.pop * 100 + "%";
-    } else {
-      this.time = formatTime(getTimeStamp(data));
-      this.date = formatDate(getTimeStamp(data));
-      this.icon = data.weather[0].icon;
-      this.skies = data.weather[0].main;
-      this.temp = data.main.temp;
-      this.feelsLike = data.main.feels_like;
-      this.tempMin = data.main.temp_min;
-      this.tempMax = data.main.temp_max;
-      this.humidity = data.main.humidity + "%";
-      this.precipitation = data.pop * 100 + "%";
-    }
-  }
-}
-
-function process5DayWeatherData(data) {
-  let currentDate = data.list[0].dt_txt.slice(0, 10);
-  let count = 1;
-  let hourlyWeatherData = {};
-  hourlyWeatherData["day" + count] = {};
-  data.list.forEach((elem) => {
-    if (currentDate !== elem.dt_txt.slice(0, 10)) {
-      count++;
-      hourlyWeatherData["day" + count] = {};
-    }
-
-    // hourlyWeatherData["day" + count][format(new Date(elem.dt_txt), "haaa")] = {
-    //   time: formatTime(getTimeStamp(elem)),
-    //   date: formatDate(getTimeStamp(elem)),
-    //   icon: elem.weather[0].icon,
-    //   skies: elem.weather[0].main,
-    //   temp: elem.main.temp,
-    //   feelsLike: elem.main.feels_like,
-    //   tempMin: elem.main.temp_min,
-    //   tempMax: elem.main.temp_max,
-    //   humidity: elem.main.humidity + "%",
-    //   precipitation: elem.pop * 100 + "%",
-    // };
-
-    currentDate = elem.dt_txt.slice(0, 10);
-  });
-
-  console.log("hourly", hourlyWeatherData);
-}
-
-// function process5DayWeatherData(data) {
-//   let currentDate = data.list[0].dt_txt.slice(0, 10);
-//   let count = 1;
-//   let hourlyWeatherData = {};
-//   hourlyWeatherData["day" + count] = {};
-//   data.list.forEach((elem) => {
-//     if (currentDate !== elem.dt_txt.slice(0, 10)) {
-//       count++;
-//       hourlyWeatherData["day" + count] = {};
-//     }
-
-//     hourlyWeatherData["day" + count][format(new Date(elem.dt_txt), "haaa")] = {
-//       time: formatTime(getTimeStamp(elem)),
-//       date: formatDate(getTimeStamp(elem)),
-//       icon: elem.weather[0].icon,
-//       skies: elem.weather[0].main,
-//       temp: elem.main.temp,
-//       feelsLike: elem.main.feels_like,
-//       tempMin: elem.main.temp_min,
-//       tempMax: elem.main.temp_max,
-//       humidity: elem.main.humidity + "%",
-//       precipitation: elem.pop * 100 + "%",
-//     };
-
-//     currentDate = elem.dt_txt.slice(0, 10);
-//   });
-
-//   console.log("hourly", hourlyWeatherData);
-// }
-
-export async function get5DayForecast(location) {
-  let data = await fetch5DayWeather(location);
-  console.log("5 day data", data);
-  let forecast = process5DayWeatherData(data);
-  return forecast;
+function convertFtoC(fTemp) {
+  return Math.trunc(((fTemp - 32) * 5) / 9);
 }
