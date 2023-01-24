@@ -1,62 +1,42 @@
 import { format } from "date-fns";
-import { fetchCurrentWeather, fetch5DayWeather } from "./apiCalls.js";
+import { fetchWeatherData } from "./apiCalls.js";
 
-export async function get5DayForecast(location) {
-  try {
-    let data = await fetch5DayWeather(location);
-    console.log("5 day data", data);
+export async function getForecast(location) {
+  let data = await fetchWeatherData(location);
+  if (data) {
     let forecast = processWeatherData(data);
     return forecast;
-  } catch (error) {
-    console.log(error);
-    return "Location not found - get5Day";
   }
-}
-
-export async function getCurrentForecast(location) {
-  try {
-    let data = await fetchCurrentWeather(location);
-    console.log("current data", data);
-    let forecast = processWeatherData(data);
-    return forecast;
-  } catch (error) {
-    console.log(error);
-    return "Location not found - get current";
-  }
+  return;
 }
 
 function processWeatherData(data) {
-  if (data.hasOwnProperty("list")) {
-    let currentDate = data.list[0].dt_txt.slice(0, 10);
-    let countDays = 1;
-    let countHrs = 0;
-    let hourlyWeatherData = {
-      location: data.city.name + ", " + data.city.country,
-    };
-    let dayTitle = "day";
-    hourlyWeatherData[dayTitle + countDays] = {};
+  let forecast = {};
 
-    data.list.forEach((hour) => {
-      let nextDate = hour.dt_txt.slice(0, 10);
-      if (currentDate !== nextDate) {
-        countDays++;
-        countHrs = 0;
-        hourlyWeatherData[dayTitle + countDays] = {};
-      }
-      hourlyWeatherData[dayTitle + countDays][countHrs] = new WeatherData(hour);
-      countHrs++;
-      currentDate = nextDate;
-    });
-    console.log("my hourly forecast:", hourlyWeatherData);
-    return hourlyWeatherData;
-  }
+  //CURRENT
+  forecast.current = new WeatherData(data.current);
+  forecast.location = data.current.name + ", " + data.current.sys.country;
 
-  let currentWeather = new WeatherData(data);
-  currentWeather.location = data.name + ", " + data.sys.country;
+  //HOURLY
+  let currentDate = data.hourly.list[0].dt_txt.slice(0, 10);
+  let countDays = 1;
+  let countHrs = 0;
+  forecast.hourly = {};
+  let dayTitle = "day";
+  forecast.hourly[dayTitle + countDays] = {};
+  data.hourly.list.forEach((hour) => {
+    let nextDate = hour.dt_txt.slice(0, 10);
+    if (currentDate !== nextDate) {
+      countDays++;
+      countHrs = 0;
+      forecast.hourly[dayTitle + countDays] = {};
+    }
+    forecast.hourly[dayTitle + countDays][countHrs] = new WeatherData(hour);
+    countHrs++;
+    currentDate = nextDate;
+  });
 
-  console.log("my current forecast:", currentWeather);
-
-  return currentWeather;
+  return forecast;
 }
 
 class WeatherData {

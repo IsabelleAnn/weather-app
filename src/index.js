@@ -1,17 +1,31 @@
 import "./style.css";
-import { getCurrentForecast, get5DayForecast } from "./data.js";
+import { getForecast } from "./data.js";
 
 const inputBox = document.getElementById("location");
 const form = document.querySelector("form");
+const errorMsgs = document.querySelectorAll(".error");
+const spanErr = document.getElementById("span-error");
 
-form.addEventListener("submit", doSomething);
+let forecast = {};
 
-function doSomething(event) {
+form.addEventListener("submit", submitLocation);
+
+async function submitLocation(event) {
   event.preventDefault();
-  if (inputBox.value) {
+  Array.from(errorMsgs).forEach((error) => {
+    error.style.display = "none";
+  });
+
+  if (inputBox.value.trim()) {
     let userInput = inputBox.value;
-    console.log(userInput, "event type", event);
-    get5DayForecast(userInput);
-    getCurrentForecast(userInput);
+    forecast = await getForecast(userInput);
+    console.log(forecast);
   }
+}
+
+export function displayError(error) {
+  spanErr.textContent = error;
+  Array.from(errorMsgs).forEach((error) => {
+    error.style.display = "block";
+  });
 }
