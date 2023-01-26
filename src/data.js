@@ -1,8 +1,10 @@
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
+import { DateTime } from "luxon";
 import { fetchWeatherData } from "./apiCalls.js";
 
-export async function getForecast(location) {
-  let data = await fetchWeatherData(location);
+export async function getForecast(userInputLocation) {
+  let data = await fetchWeatherData(userInputLocation);
+  console.log(data);
   if (data) {
     let forecast = processWeatherData(data);
     return forecast;
@@ -16,6 +18,8 @@ function processWeatherData(data) {
   //CURRENT
   forecast.current = new WeatherData(data.current);
   forecast.location = data.current.name + ", " + data.current.sys.country;
+
+  forecast.currentTimeInLocation = {};
 
   //HOURLY
   let currentDate = data.hourly.list[0].dt_txt.slice(0, 10);
@@ -57,8 +61,9 @@ class WeatherData {
       imperial,
       metric,
     };
-    this.time = formatTime(getTimeStamp(data));
-    this.date = formatDate(getTimeStamp(data));
+
+    this.time = formatDate(getDate(data));
+    this.date = formatTime(getDate(data));
     this.icon = data.weather[0].icon;
     this.skies = data.weather[0].main;
     this.humidity = data.main.humidity + "%";
@@ -66,15 +71,23 @@ class WeatherData {
   }
 }
 
-function getTimeStamp(data) {
-  if (data.hasOwnProperty("dt")) {
-    return data.dt;
+function getDate(data) {
+  if (data.hasOwnProperty("dt_txt")) {
+    let date = parseISO(data.dt_txt);
+
+    return date;
   }
-  return data.list.dt_txt;
+
+  let date = new Date((data.dt + data.timezone) * 1000);
+
+  let dateStr = parseISO(
+    `${date.getUTCFullYear()}:${date.getUTCMonth()}:${date.getUTCDate()} ${date.getUTCHours()}:${date.getUTCMinutes()}:${date.getUTCSeconds()}`
+  );
+  return dateStr;
 }
 
 function formatDate(date) {
-  return format(date * 1000, "PPPP");
+  return format(date, "PPPP");
 }
 
 function formatTime(time) {
