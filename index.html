@@ -5,15 +5,50 @@
     <title>Weather</title>
   </head>
   <body>
-    <form>
-      <label for="location">Location: </label>
-      <input id="location" type="text" placeholder="ex: Austin, TX, US" />
-      <button type="submit" id="search">Search</button>
-      <span id="span-error" class="error"></span>
-      <p id="par-error" class="error">
-        Enter either "City", "City, Country" or "City, State, Country"
-      </p>
-    </form>
+    <div id="container">
+      <form>
+        <label for="location">Location: </label>
+        <input id="location" type="text" placeholder="Enter City Name" />
+        <button type="submit" id="search">Search</button>
+        <span id="span-error" class="error"></span>
+        <p id="par-error" class="error">
+          Enter either "City", "City, Country" or "City, State, Country"
+        </p>
+      </form>
+      <div id="current-weather-container">
+        <div id="left-container">
+          <h1 class="current-weather">Rainy</h1>
+          <h2 class="current-weather">55°F</h2>
+          <h3 class="class-current-weather">Austin, TX</h3>
+          <p id="f-unit" class="temp-unit">°F</p>
+          <p id="c-unit" class="temp-unit">°C</p>
+        </div>
+        <div id="right-container"></div>
+      </div>
+      <div id="daily-weather-container">
+        <div id="day1">
+          <h1 class="daily-weather">Rainy</h1>
+          <h2 class="daily-weather">55°F</h2>
+        </div>
+        <div id="day2">
+          <h1 class="daily-weather">Rainy</h1>
+          <h2 class="daily-weather">55°F</h2>
+        </div>
+        <div id="day3">
+          <h1 class="daily-weather">Rainy</h1>
+          <h2 class="daily-weather">55°F</h2>
+        </div>
+        <div id="day4">
+          <h1 class="daily-weather">Rainy</h1>
+          <h2 class="daily-weather">55°F</h2>
+        </div>
+        <div id="day5">
+          <h1 class="daily-weather">Rainy</h1>
+          <h2 class="daily-weather">55°F</h2>
+        </div>
+      </div>
+    </div>
+
     <script src="bundle.js"></script>
   </body>
 </html>
