@@ -1,5 +1,4 @@
 import { format, parseISO } from "date-fns";
-import { DateTime } from "luxon";
 import { fetchWeatherData } from "./apiCalls.js";
 
 export async function getForecast(userInputLocation) {
@@ -19,8 +18,6 @@ function processWeatherData(data) {
   forecast.current = new WeatherData(data.current);
   forecast.location = data.current.name + ", " + data.current.sys.country;
 
-  forecast.currentTimeInLocation = {};
-
   //HOURLY
   let currentDate = data.hourly.list[0].dt_txt.slice(0, 10);
   let countDays = 1;
@@ -28,6 +25,7 @@ function processWeatherData(data) {
   forecast.hourly = {};
   let dayTitle = "day";
   forecast.hourly[dayTitle + countDays] = {};
+
   data.hourly.list.forEach((hour) => {
     let nextDate = hour.dt_txt.slice(0, 10);
     if (currentDate !== nextDate) {
@@ -56,14 +54,13 @@ class WeatherData {
       imperial[temp] = Math.trunc(imperial[temp]);
       metric[temp] = Math.trunc(convertFtoC(imperial[temp]));
     }
-
     this.temps = {
       imperial,
       metric,
     };
-
-    this.time = formatDate(getDate(data));
-    this.date = formatTime(getDate(data));
+    this.date = formatDate(getForecastDate(data));
+    this.time = formatTime(getForecastDate(data));
+    this.day;
     this.icon = data.weather[0].icon;
     this.skies = data.weather[0].main;
     this.humidity = data.main.humidity + "%";
@@ -71,27 +68,33 @@ class WeatherData {
   }
 }
 
-function getDate(data) {
+function getForecastDate(data) {
+  //hourly:
   if (data.hasOwnProperty("dt_txt")) {
-    let date = parseISO(data.dt_txt);
-
-    return date;
+    return data.dt_txt;
   }
-
+  //current:
   let date = new Date((data.dt + data.timezone) * 1000);
 
-  let dateStr = parseISO(
-    `${date.getUTCFullYear()}:${date.getUTCMonth()}:${date.getUTCDate()} ${date.getUTCHours()}:${date.getUTCMinutes()}:${date.getUTCSeconds()}`
-  );
+  const makeTwoDigit = (num) => {
+    return ("0" + num).slice(-2);
+  };
+
+  let dateStr = `${date.getUTCFullYear()}-${makeTwoDigit(
+    date.getUTCMonth() + 1
+  )}-${date.getUTCDate()} ${makeTwoDigit(date.getUTCHours())}:${makeTwoDigit(
+    date.getUTCMinutes()
+  )}:${makeTwoDigit(date.getUTCSeconds())}`;
+
   return dateStr;
 }
 
 function formatDate(date) {
-  return format(date, "PPPP");
+  return format(parseISO(date), "EEEE, MMM. do, yyyy");
 }
 
-function formatTime(time) {
-  return format(time * 1000, "p");
+function formatTime(date) {
+  return format(parseISO(date), "h:mmaaa");
 }
 
 function convertFtoC(fTemp) {

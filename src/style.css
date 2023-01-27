@@ -1,6 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
-  color: green;
+  background-color: rgb(24, 33, 49);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  color: rgb(211, 211, 211);
 }
 .error {
   display: none;
+}
+#container {
+  height: 100vh;
+  width: 1024px;
+
+  background-image: url("../src/images/Izy_beautiful_fantasy_rainy_nature_scene_4k_c3e4ee0f-a488-470e-ba97-4b6f6b49184c.png");
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: bottom;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.42);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+#current-weather-container {
+  align-self: flex-start;
+}
+
+#daily-weather-container {
+  display: grid;
+  grid-template-columns: repeat(5, 204.8px);
+  grid-template-rows: 1fr;
+  background-color: rgba(0, 0, 0, 0.452);
+}
+
+.daily-weather {
+  text-align: center;
+}
+
+#day2,
+#day3,
+#day4,
+#day5 {
+  border-left: white solid 1px;
 }
