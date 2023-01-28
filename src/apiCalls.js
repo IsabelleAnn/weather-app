@@ -13,7 +13,10 @@ export async function fetchWeatherData(location) {
       json.hourly = await fetchHourlyWeatherData(location);
       return json;
     } else {
-      throw new Error(json.current.message);
+      throw new Error(
+        json.current.message +
+          '. Ex: "City", "City, Country" or "City, State, Country".'
+      );
     }
   } catch (error) {
     console.log(error.message);
@@ -42,6 +45,6 @@ export async function fetchHourlyWeatherData(location) {
 }
 
 function handleError(error) {
-  let errorStr = error.charAt(0).toUpperCase() + error.slice(1) + ".";
+  let errorStr = error.charAt(0).toUpperCase() + error.slice(1);
   displayError(errorStr);
 }

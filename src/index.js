@@ -3,7 +3,7 @@ import { getForecast } from "./data.js";
 
 const inputBox = document.getElementById("location");
 const form = document.querySelector("form");
-const errorMsgs = document.querySelectorAll(".error");
+const errorMsg = document.getElementById("error");
 const spanErr = document.getElementById("span-error");
 
 let forecast = {};
@@ -19,9 +19,7 @@ inputBox.value = "";
 
 async function submitLocation(event) {
   event.preventDefault();
-  Array.from(errorMsgs).forEach((error) => {
-    error.style.display = "none";
-  });
+  errorMsg.style.display = "none";
 
   if (inputBox.value.trim()) {
     let userInput = inputBox.value;
@@ -33,12 +31,13 @@ async function submitLocation(event) {
 }
 
 export function displayError(error) {
-  spanErr.textContent = error;
-  Array.from(errorMsgs).forEach((error) => {
-    error.style.display = "block";
-  });
+  errorMsg.textContent = error;
+
+  errorMsg.style.display = "block";
 }
 
 function displayForecast(forecast) {
   console.log("display", forecast);
+  const currentTemp = document.getElementById("current-temp");
+  // currentTemp.textContent = forecast.current.temps.imperial.temp;
 }

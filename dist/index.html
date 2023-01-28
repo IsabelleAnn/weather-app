@@ -5,46 +5,72 @@
     <title>Weather</title>
   </head>
   <body>
-    <div id="container">
-      <form>
+    <form>
+      <div id="measurement-btns">
+        <p class="measurement-unit selected" id="f-unit-btn">°F</p>
+        <p class="measurement-unit" id="c-unit-btn">°C</p>
+      </div>
+
+      <div id="submit-section">
         <label for="location">Location: </label>
         <input id="location" type="text" placeholder="Enter City Name" />
         <button type="submit" id="search">Search</button>
-        <span id="span-error" class="error"></span>
-        <p id="par-error" class="error">
-          Enter either "City", "City, Country" or "City, State, Country"
-        </p>
-      </form>
+        <p id="error" class="hidden"></p>
+      </div>
+    </form>
+
+    <div id="container">
       <div id="current-weather-container">
         <div id="left-container">
-          <h1 class="current-weather">Rainy</h1>
-          <h2 class="current-weather">55°F</h2>
-          <h3 class="class-current-weather">Austin, TX</h3>
-          <p id="f-unit" class="temp-unit">°F</p>
-          <p id="c-unit" class="temp-unit">°C</p>
+          <h1 id="icon-main" class="current-weather">ICON</h1>
+          <h1 id="current-temp" class="current-weather">
+            55 <span class="measurement" id="f-unit-text">°F</span>
+          </h1>
+
+          <span class="hidden" id="c-unit-text">°C</span>
+          <p class="current-weather">Precipitation:</p>
+          <p class="current-weather">Humidity:</p>
+          <p class="current-weather">
+            Wind: <span class="" id="mph">mph</span>
+            <span class="hidden" id="mps">mps</span>
+          </p>
         </div>
-        <div id="right-container"></div>
+        <div id="right-container">
+          <h1 class="current-weather">Austin, TX</h1>
+          <p class="current-weather">Monday, Jan. 27th, 2023</p>
+          <h2 class="current-weather">Rainy</h2>
+        </div>
       </div>
       <div id="daily-weather-container">
         <div id="day1">
-          <h1 class="daily-weather">Rainy</h1>
-          <h2 class="daily-weather">55°F</h2>
+          <h2 class="daily-weather">Monday</h2>
+          <h1 class="daily-weather">Icon</h1>
+          <h3 class="daily-weather">55°F</h3>
         </div>
         <div id="day2">
-          <h1 class="daily-weather">Rainy</h1>
-          <h2 class="daily-weather">55°F</h2>
+          <h2 class="daily-weather">Monday</h2>
+          <h1 class="daily-weather">Icon</h1>
+          <h3 class="daily-weather">55°F</h3>
         </div>
         <div id="day3">
-          <h1 class="daily-weather">Rainy</h1>
-          <h2 class="daily-weather">55°F</h2>
+          <h2 class="daily-weather">Monday</h2>
+          <h1 class="daily-weather">Icon</h1>
+          <h3 class="daily-weather">55°F</h3>
         </div>
         <div id="day4">
-          <h1 class="daily-weather">Rainy</h1>
-          <h2 class="daily-weather">55°F</h2>
+          <h2 class="daily-weather">Monday</h2>
+          <h1 class="daily-weather">Icon</h1>
+          <h3 class="daily-weather">55°F</h3>
         </div>
         <div id="day5">
-          <h1 class="daily-weather">Rainy</h1>
-          <h2 class="daily-weather">55°F</h2>
+          <h2 class="daily-weather">Monday</h2>
+          <h1 class="daily-weather">Icon</h1>
+          <h3 class="daily-weather">55°F</h3>
+        </div>
+        <div id="day6">
+          <h2 class="daily-weather">Monday</h2>
+          <h1 class="daily-weather">Icon</h1>
+          <h3 class="daily-weather">55°F</h3>
         </div>
       </div>
     </div>

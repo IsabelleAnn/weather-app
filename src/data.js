@@ -54,10 +54,13 @@ class WeatherData {
       imperial[temp] = Math.trunc(imperial[temp]);
       metric[temp] = Math.trunc(convertFtoC(imperial[temp]));
     }
-    this.temps = {
+    this.measurements = {
       imperial,
       metric,
     };
+    imperial.wind = Math.trunc(data.wind.speed);
+    metric.wind = Math.trunc(convertMPHtoMPS(data.wind.speed));
+
     this.date = formatDate(getForecastDate(data));
     this.time = formatTime(getForecastDate(data));
     this.day;
@@ -99,4 +102,8 @@ function formatTime(date) {
 
 function convertFtoC(fTemp) {
   return Math.trunc(((fTemp - 32) * 5) / 9);
+}
+
+function convertMPHtoMPS(mphSpeed) {
+  return (mphSpeed * 1609.34) / 3600;
 }
