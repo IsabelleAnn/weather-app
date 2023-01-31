@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-weight: regular;
 }
 .hidden {
   display: none;
@@ -10,6 +11,7 @@
   font-weight: bold;
 }
 body {
+  font-family: "News Cycle", Arial, Helvetica, sans-serif;
   height: 100vh;
   background-color: rgb(31, 31, 31);
   display: flex;
@@ -18,6 +20,23 @@ body {
   flex-direction: column;
   color: rgb(211, 211, 211);
   overflow: scroll;
+}
+i {
+  color: rgb(211, 211, 211);
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+input {
+  all: unset;
+  border-bottom: 1px solid rgb(211, 211, 211);
+  width: 150px;
+}
+input::placeholder {
+  opacity: 15%;
 }
 
 form {
@@ -48,12 +67,12 @@ form {
   height: 94vh;
   width: 50%;
   margin-bottom: 20px;
-  background-image: url("../src/images/Izy_beautiful_fantasy_rainy_nature_scene_4k_c3e4ee0f-a488-470e-ba97-4b6f6b49184c.png");
+  background-image: url("../src/images/snow1.png");
   /* background-image: url("../src/images/Izy_cute_cats_in_rain_under_umbrella_nature_rain_clouds_colorfu_b89ae834-d65f-4d41-863e-115638ba5b21.png"); */
   /* background-image: url("../src/images/Izy_beautiful_fantasy_sunny_nature_scene_4k_15b841d6-5f82-4446-9aca-573f06a6a1d1.png"); */
   background-repeat: no-repeat;
   background-position-x: center;
-  background-position-y: bottom;
+  background-position-y: 65%;
   background-size: cover;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.42);
 
@@ -72,11 +91,18 @@ form {
 #left-container {
   justify-self: start;
 }
+#icon-temp-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#icon-current {
+}
 #current-temp {
   display: inline-block;
 }
 .current-weather {
-  padding: 5px 0px;
+  /* padding: 5px 0px; */
 }
 #icon-main {
   display: inline-block;
@@ -86,7 +112,7 @@ form {
   font-size: 0.8rem;
 }
 #measurement-btns {
-  margin-right: 10px;
+  /* margin-right: 10px; */
   justify-self: flex-start;
   display: flex;
   justify-content: center;
@@ -135,5 +161,5 @@ form {
 #day4,
 #day5,
 #day6 {
-  padding: 20px 0px;
+  /* padding: 20px 0px; */
 }

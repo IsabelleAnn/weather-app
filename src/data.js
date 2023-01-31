@@ -67,7 +67,10 @@ class WeatherData {
     this.icon = data.weather[0].icon;
     this.skies = data.weather[0].main;
     this.humidity = data.main.humidity + "%";
-    this.precipitation = (data.pop ? Math.trunc(data.pop * 100) : 0) + "%";
+    console.log(data.pop);
+    if (data.pop) {
+      this.precipitation = Math.trunc(data.pop * 100) + "%";
+    }
   }
 }
 

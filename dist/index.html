@@ -2,19 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/c8a8ee493a.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Weather</title>
   </head>
   <body>
     <form>
       <div id="measurement-btns">
-        <p class="measurement-unit selected" id="f-unit-btn">°F</p>
-        <p class="measurement-unit" id="c-unit-btn">°C</p>
+        <button class="measurement-unit selected" id="f-unit-btn">°F</button>
+        <button class="measurement-unit" id="c-unit-btn">°C</button>
       </div>
 
       <div id="submit-section">
         <label for="location">Location: </label>
         <input id="location" type="text" placeholder="Enter City Name" />
-        <button type="submit" id="search">Search</button>
+        <button type="submit" id="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
         <p id="error" class="hidden"></p>
       </div>
     </form>
@@ -22,23 +34,37 @@
     <div id="container">
       <div id="current-weather-container">
         <div id="left-container">
-          <h1 id="icon-main" class="current-weather">ICON</h1>
-          <h1 id="current-temp" class="current-weather">
-            55 <span class="measurement" id="f-unit-text">°F</span>
+          <h1 id="icon-temp-container" class="current-weather">
+            <img id="icon-current" class="current-weather" />
+            <div class="f-unit">
+              <span id="current-temp-F"></span>
+              <span class="measurement">°F</span>
+            </div>
+            <div class="c-unit hidden">
+              <span id="current-temp-C"></span>
+              <span class="measurement">°C</span>
+            </div>
           </h1>
-
-          <span class="hidden" id="c-unit-text">°C</span>
-          <p class="current-weather">Precipitation:</p>
-          <p class="current-weather">Humidity:</p>
+          <h2 id="current-skies" class="current-weather"></h2>
           <p class="current-weather">
-            Wind: <span class="" id="mph">mph</span>
-            <span class="hidden" id="mps">mps</span>
+            Feels Like: <span id="current-feels-like"></span><span>°</span>
+          </p>
+          <p class="current-weather">
+            Humidity: <span id="current-humidity"></span>
+          </p>
+          <p class="current-weather">
+            Wind: <span id="current-wind"></span
+            ><span class="measurement"> mph</span
+            ><span class="hidden measurement"> mps</span>
           </p>
         </div>
+
         <div id="right-container">
-          <h1 class="current-weather">Austin, TX</h1>
-          <p class="current-weather">Monday, Jan. 27th, 2023</p>
-          <h2 class="current-weather">Rainy</h2>
+          <h1 id="current-city" class="current-weather">Austin, TX</h1>
+          <h2 id="current-time" class="current-weather">3:30pm</h2>
+          <p id="current-date" class="current-weather">
+            Monday, Jan. 27th, 2023
+          </p>
         </div>
       </div>
       <div id="daily-weather-container">
