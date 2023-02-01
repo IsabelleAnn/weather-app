@@ -3,7 +3,7 @@ import { fetchWeatherData } from "./apiCalls.js";
 
 export async function getForecast(userInputLocation) {
   let data = await fetchWeatherData(userInputLocation);
-  console.log(data);
+  console.log("original data", data);
   if (data) {
     let forecast = processWeatherData(data);
     return forecast;
@@ -17,6 +17,13 @@ function processWeatherData(data) {
   //CURRENT
   forecast.current = new WeatherData(data.current);
   forecast.location = data.current.name + ", " + data.current.sys.country;
+  forecast.current.date = formatDate(getForecastDate(data.current));
+  forecast.current.measurements.imperial.feelsLike = Math.trunc(
+    data.current.main.feels_like
+  );
+  forecast.current.measurements.metric.feelsLike = Math.trunc(
+    convertFtoC(data.current.main.feels_like)
+  );
 
   //HOURLY
   let currentDate = data.hourly.list[0].dt_txt.slice(0, 10);
@@ -24,14 +31,20 @@ function processWeatherData(data) {
   let countHrs = 0;
   forecast.hourly = {};
   let dayTitle = "day";
-  forecast.hourly[dayTitle + countDays] = {};
+  forecast.hourly[dayTitle + countDays] = {
+    date: formatDate(getForecastDate(data.hourly.list[0])),
+  };
 
   data.hourly.list.forEach((hour) => {
     let nextDate = hour.dt_txt.slice(0, 10);
     if (currentDate !== nextDate) {
       countDays++;
       countHrs = 0;
-      forecast.hourly[dayTitle + countDays] = {};
+      forecast.hourly[dayTitle + countDays] = {
+        date: formatDate(getForecastDate(hour)),
+      };
+      forecast.hourly[dayTitle + countDays].tempMax = {};
+      forecast.hourly[dayTitle + countDays].tempMin = {};
     }
     forecast.hourly[dayTitle + countDays][countHrs] = new WeatherData(hour);
     countHrs++;
@@ -45,9 +58,8 @@ class WeatherData {
   constructor(data) {
     let imperial = {
       temp: data.main.temp,
-      feelsLike: data.main.feels_like,
-      tempMin: data.main.temp_min,
-      tempMax: data.main.temp_max,
+      // tempMin: data.main.temp_min,
+      // tempMax: data.main.temp_max,
     };
     let metric = {};
     for (const temp in imperial) {
@@ -61,15 +73,13 @@ class WeatherData {
     imperial.wind = Math.trunc(data.wind.speed);
     metric.wind = Math.trunc(convertMPHtoMPS(data.wind.speed));
 
-    this.date = formatDate(getForecastDate(data));
     this.time = formatTime(getForecastDate(data));
     this.day;
     this.icon = data.weather[0].icon;
     this.skies = data.weather[0].main;
-    this.humidity = data.main.humidity + "%";
-    console.log(data.pop);
+    this.humidity = data.main.humidity;
     if (data.pop) {
-      this.precipitation = Math.trunc(data.pop * 100) + "%";
+      this.precipitation = Math.trunc(data.pop * 100);
     }
   }
 }
@@ -100,6 +110,7 @@ function formatDate(date) {
 }
 
 function formatTime(date) {
+  console.log("date", date);
   return format(parseISO(date), "h:mmaaa");
 }
 
@@ -110,3 +121,6 @@ function convertFtoC(fTemp) {
 function convertMPHtoMPS(mphSpeed) {
   return (mphSpeed * 1609.34) / 3600;
 }
+
+function getMax() {}
+function getMin() {}

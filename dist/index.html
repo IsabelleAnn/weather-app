@@ -15,47 +15,53 @@
     <title>Weather</title>
   </head>
   <body>
-    <form>
-      <div id="measurement-btns">
-        <button class="measurement-unit selected" id="f-unit-btn">°F</button>
-        <button class="measurement-unit" id="c-unit-btn">°C</button>
+    <div id="header-container">
+      <div id="unit-btn">
+        <button class="unit selected" id="f-unit-btn">°F</button>
+        <button class="unit" id="c-unit-btn">°C</button>
       </div>
-
-      <div id="submit-section">
+      <form>
         <label for="location">Location: </label>
         <input id="location" type="text" placeholder="Enter City Name" />
         <button type="submit" id="search">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
         <p id="error" class="hidden"></p>
-      </div>
-    </form>
+      </form>
+    </div>
 
     <div id="container">
       <div id="current-weather-container">
         <div id="left-container">
           <h1 id="icon-temp-container" class="current-weather">
             <img id="icon-current" class="current-weather" />
-            <div class="f-unit">
-              <span id="current-temp-F"></span>
-              <span class="measurement">°F</span>
-            </div>
-            <div class="c-unit hidden">
-              <span id="current-temp-C"></span>
-              <span class="measurement">°C</span>
-            </div>
+            <span class="imperial" id="current-temp-i"></span>
+            <span class="imperial">°F</span>
+            <span class="metric" id="current-temp-m"></span>
+            <span class="metric">°C</span>
           </h1>
+
           <h2 id="current-skies" class="current-weather"></h2>
+
           <p class="current-weather">
-            Feels Like: <span id="current-feels-like"></span><span>°</span>
+            Feels Like:
+            <span class="imperial" id="feels-like-i"></span>
+            <span class="imperial">°F</span>
+            <span class="metric" id="feels-like-m"></span>
+            <span class="metric">°C</span>
           </p>
+
           <p class="current-weather">
-            Humidity: <span id="current-humidity"></span>
+            Humidity:
+            <span id="current-humidity"></span><span>%</span>
           </p>
+
           <p class="current-weather">
-            Wind: <span id="current-wind"></span
-            ><span class="measurement"> mph</span
-            ><span class="hidden measurement"> mps</span>
+            Wind:
+            <span class="imperial" id="current-wind-i"></span>
+            <span class="imperial"> mph</span>
+            <span class="metric" id="current-wind-m"></span>
+            <span class="metric"> mps</span>
           </p>
         </div>
 
@@ -69,34 +75,79 @@
       </div>
       <div id="daily-weather-container">
         <div id="day1">
-          <h2 class="daily-weather">Monday</h2>
-          <h1 class="daily-weather">Icon</h1>
-          <h3 class="daily-weather">55°F</h3>
+          <h2 class="day"></h2>
+
+          <img id="daily-icon" class="" />
+
+          <h3 class="imperial daily-high"></h3>
+          <span class="imperial">°F</span>
+          <h3 class="metric daily-high"></h3>
+          <span class="metric">°C </span>
+
+          <h3 class="imperial daily-low"></h3>
+          <span class="imperial">°F</span>
+          <h3 class="metric daily-low"></h3>
+          <span class="metric">°C</span>
         </div>
         <div id="day2">
-          <h2 class="daily-weather">Monday</h2>
-          <h1 class="daily-weather">Icon</h1>
-          <h3 class="daily-weather">55°F</h3>
+          <h2 class="day"></h2>
+
+          <img id="daily-icon" class="" />
+
+          <h3 class="imperial daily-high"></h3>
+          <span class="imperial">°F</span>
+          <h3 class="metric daily-high"></h3>
+          <span class="metric">°C </span>
+
+          <h3 class="imperial daily-low"></h3>
+          <span class="imperial">°F</span>
+          <h3 class="metric daily-low"></h3>
+          <span class="metric">°C</span>
         </div>
         <div id="day3">
-          <h2 class="daily-weather">Monday</h2>
-          <h1 class="daily-weather">Icon</h1>
-          <h3 class="daily-weather">55°F</h3>
+          <h2 class="day"></h2>
+
+          <img id="daily-icon" class="" />
+
+          <h3 class="imperial daily-high"></h3>
+          <span class="imperial">°F</span>
+          <h3 class="metric daily-high"></h3>
+          <span class="metric">°C </span>
+
+          <h3 class="imperial daily-low"></h3>
+          <span class="imperial">°F</span>
+          <h3 class="metric daily-low"></h3>
+          <span class="metric">°C</span>
         </div>
         <div id="day4">
-          <h2 class="daily-weather">Monday</h2>
-          <h1 class="daily-weather">Icon</h1>
-          <h3 class="daily-weather">55°F</h3>
+          <h2 class="day"></h2>
+
+          <img id="daily-icon" class="" />
+
+          <h3 class="imperial daily-high"></h3>
+          <span class="imperial">°F</span>
+          <h3 class="metric daily-high"></h3>
+          <span class="metric">°C </span>
+
+          <h3 class="imperial daily-low"></h3>
+          <span class="imperial">°F</span>
+          <h3 class="metric daily-low"></h3>
+          <span class="metric">°C</span>
         </div>
         <div id="day5">
-          <h2 class="daily-weather">Monday</h2>
-          <h1 class="daily-weather">Icon</h1>
-          <h3 class="daily-weather">55°F</h3>
-        </div>
-        <div id="day6">
-          <h2 class="daily-weather">Monday</h2>
-          <h1 class="daily-weather">Icon</h1>
-          <h3 class="daily-weather">55°F</h3>
+          <h2 class="day"></h2>
+
+          <img id="daily-icon" class="" />
+
+          <h3 class="imperial daily-high"></h3>
+          <span class="imperial">°F</span>
+          <h3 class="metric daily-high"></h3>
+          <span class="metric">°C </span>
+
+          <h3 class="imperial daily-low"></h3>
+          <span class="imperial">°F</span>
+          <h3 class="metric daily-low"></h3>
+          <span class="metric">°C</span>
         </div>
       </div>
     </div>
