@@ -8,21 +8,19 @@
   display: none;
 }
 .selected {
-  font-weight: bold;
+  font-weight: 700;
 }
 body {
-  font-family: "News Cycle", Arial, Helvetica, sans-serif;
+  font-family: "Signika", sans-serif;
   height: 100vh;
-  background-color: rgb(31, 31, 31);
+  background-color: rgb(27, 27, 27);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   color: rgb(211, 211, 211);
   overflow: scroll;
-}
-i {
-  color: rgb(211, 211, 211);
+  text-shadow: 2px 0 4px black;
 }
 
 button {
@@ -66,9 +64,7 @@ form {
   height: 94vh;
   width: 50%;
   margin-bottom: 20px;
-  background-image: url("../src/images/snow1.png");
-  /* background-image: url("../src/images/Izy_cute_cats_in_rain_under_umbrella_nature_rain_clouds_colorfu_b89ae834-d65f-4d41-863e-115638ba5b21.png"); */
-  /* background-image: url("../src/images/Izy_beautiful_fantasy_sunny_nature_scene_4k_15b841d6-5f82-4446-9aca-573f06a6a1d1.png"); */
+
   background-repeat: no-repeat;
   background-position-x: center;
   background-position-y: 65%;
@@ -83,35 +79,46 @@ form {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
-  /* 
-  background-color: rgba(0, 0, 0, 0.452); */
 }
 
 #left-container {
   justify-self: start;
+  font-weight: 400;
 }
+#right-container {
+  justify-self: end;
+  text-align: right;
+  margin-top: 20px;
+}
+
 #icon-temp-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 3rem;
+  font-weight: bold;
 }
-#icon-current {
-}
-#current-temp {
-  display: inline-block;
-}
+
 .current-weather {
-  /* padding: 5px 0px; */
+  font-size: 1.5rem;
+  margin-bottom: 15px;
 }
-#icon-main {
-  display: inline-block;
+.data-title {
+  margin-right: 10px;
+}
+
+.right-data {
+  margin-bottom: 15px;
+}
+#current-skies {
+  font-size: 2.5rem;
 }
 .unit {
   display: inline-block;
   font-size: 0.8rem;
 }
+
 #unit-btn {
-  /* margin-right: 10px; */
   justify-self: flex-start;
   display: flex;
   justify-content: center;
@@ -126,34 +133,16 @@ form {
 #c-unit-btn {
   padding: 0px 5px;
   width: 20px;
-  font-size: 1rem;
-}
-
-#right-container {
-  justify-self: end;
-  text-align: right;
+  font-size: 1.3rem;
 }
 
 #daily-weather-container {
   display: grid;
   overflow: scroll;
-  /* gap: 10px; */
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.452);
-}
-
-.daily-weather {
-  text-align: center;
-}
-
-#day2,
-#day3,
-#day4,
-#day5,
-#day6 {
-  border-left: solid 0.5px rgb(97, 97, 97);
+  gap: 10px;
+  margin: 10px;
 }
 #day1,
 #day2,
@@ -161,5 +150,30 @@ form {
 #day4,
 #day5,
 #day6 {
-  /* padding: 20px 0px; */
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.452);
+  border-radius: 20px;
+  font-size: 0;
+  padding: 10px;
+}
+.day {
+  font-size: 2rem;
+}
+.daily-icon {
+  height: 80px;
+  display: block;
+  margin: auto;
+}
+
+.daily-high {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+span.daily-high {
+  margin-right: 10px;
+}
+.daily-low {
+  font-size: 1rem;
+  font-weight: normal;
 }

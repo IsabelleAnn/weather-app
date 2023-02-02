@@ -43,8 +43,6 @@ function processWeatherData(data) {
       forecast.hourly[dayTitle + countDays] = {
         date: formatDate(getForecastDate(hour)),
       };
-      forecast.hourly[dayTitle + countDays].tempMax = {};
-      forecast.hourly[dayTitle + countDays].tempMin = {};
     }
     forecast.hourly[dayTitle + countDays][countHrs] = new WeatherData(hour);
     countHrs++;
@@ -58,8 +56,8 @@ class WeatherData {
   constructor(data) {
     let imperial = {
       temp: data.main.temp,
-      // tempMin: data.main.temp_min,
-      // tempMax: data.main.temp_max,
+      tempMin: data.main.temp_min,
+      tempMax: data.main.temp_max,
     };
     let metric = {};
     for (const temp in imperial) {
@@ -74,7 +72,7 @@ class WeatherData {
     metric.wind = Math.trunc(convertMPHtoMPS(data.wind.speed));
 
     this.time = formatTime(getForecastDate(data));
-    this.day;
+
     this.icon = data.weather[0].icon;
     this.skies = data.weather[0].main;
     this.humidity = data.main.humidity;
@@ -98,9 +96,11 @@ function getForecastDate(data) {
 
   let dateStr = `${date.getUTCFullYear()}-${makeTwoDigit(
     date.getUTCMonth() + 1
-  )}-${date.getUTCDate()} ${makeTwoDigit(date.getUTCHours())}:${makeTwoDigit(
-    date.getUTCMinutes()
-  )}:${makeTwoDigit(date.getUTCSeconds())}`;
+  )}-${makeTwoDigit(date.getUTCDate())} ${makeTwoDigit(
+    date.getUTCHours()
+  )}:${makeTwoDigit(date.getUTCMinutes())}:${makeTwoDigit(
+    date.getUTCSeconds()
+  )}`;
 
   return dateStr;
 }
@@ -110,7 +110,6 @@ function formatDate(date) {
 }
 
 function formatTime(date) {
-  console.log("date", date);
   return format(parseISO(date), "h:mmaaa");
 }
 
@@ -121,6 +120,3 @@ function convertFtoC(fTemp) {
 function convertMPHtoMPS(mphSpeed) {
   return (mphSpeed * 1609.34) / 3600;
 }
-
-function getMax() {}
-function getMin() {}

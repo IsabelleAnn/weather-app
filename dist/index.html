@@ -5,7 +5,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <script
@@ -33,121 +33,118 @@
     <div id="container">
       <div id="current-weather-container">
         <div id="left-container">
-          <h1 id="icon-temp-container" class="current-weather">
-            <img id="icon-current" class="current-weather" />
+          <div id="icon-temp-container">
+            <img id="icon-current" class=/>
             <span class="imperial" id="current-temp-i"></span>
             <span class="imperial">°F</span>
             <span class="metric" id="current-temp-m"></span>
             <span class="metric">°C</span>
-          </h1>
+          </div>
 
           <h2 id="current-skies" class="current-weather"></h2>
 
-          <p class="current-weather">
-            Feels Like:
-            <span class="imperial" id="feels-like-i"></span>
-            <span class="imperial">°F</span>
-            <span class="metric" id="feels-like-m"></span>
-            <span class="metric">°C</span>
-          </p>
+          <div class="current-weather">
+            <span class="data-title">Feels Like:</span>
+            <span class="imperial" id="feels-like-i"></span
+            ><span class="imperial">°F</span>
+            <span class="metric" id="feels-like-m"></span
+            ><span class="metric">°C</span>
+          </div>
+          <div class="current-weather">
+            <span class="data-title">High:</span>
+            <span class="imperial" id="high-i"></span
+            ><span class="imperial">°F</span>
+            <span class="metric" id="high-m"></span
+            ><span class="metric">°C</span>
+          </div>
+          <div class="current-weather">
+            <span class="data-title">Low:</span>
+            <span class="imperial" id="low-i"></span
+            ><span class="imperial">°F</span>
+            <span class="metric" id="low-m"></span
+            ><span class="metric">°C</span>
+          </div>
 
-          <p class="current-weather">
-            Humidity:
+          <div class="current-weather">
+            <span class="data-title">Humidity:</span>
             <span id="current-humidity"></span><span>%</span>
-          </p>
+          </div>
 
-          <p class="current-weather">
-            Wind:
-            <span class="imperial" id="current-wind-i"></span>
-            <span class="imperial"> mph</span>
-            <span class="metric" id="current-wind-m"></span>
-            <span class="metric"> mps</span>
-          </p>
+          <div class="current-weather">
+            <span class="data-title">Wind:</span>
+            <span class="imperial" id="current-wind-i"></span
+            ><span class="imperial"> mph</span>
+            <span class="metric" id="current-wind-m"></span
+            ><span class="metric"> mps</span>
+          </div>
         </div>
 
         <div id="right-container">
-          <h1 id="current-city" class="current-weather">Austin, TX</h1>
-          <h2 id="current-time" class="current-weather">3:30pm</h2>
-          <p id="current-date" class="current-weather">
-            Monday, Jan. 27th, 2023
-          </p>
+          <p class="right-data" id="current-date"></p>
+          <h1 class="right-data" id="current-city"></h1>
+          <h2 class="right-data" id="current-time"></h2>
         </div>
       </div>
       <div id="daily-weather-container">
         <div id="day1">
           <h2 class="day"></h2>
-
-          <img id="daily-icon" class="" />
-
+          <img class="daily-icon" />
           <h3 class="imperial daily-high"></h3>
-          <span class="imperial">°F</span>
+          <span class="imperial daily-high">°F</span>
           <h3 class="metric daily-high"></h3>
-          <span class="metric">°C </span>
-
+          <span class="metric daily-high">°C</span>
           <h3 class="imperial daily-low"></h3>
-          <span class="imperial">°F</span>
+          <span class="imperial daily-low">°F</span>
           <h3 class="metric daily-low"></h3>
-          <span class="metric">°C</span>
+          <span class="metric daily-low">°C</span>
         </div>
         <div id="day2">
           <h2 class="day"></h2>
-
-          <img id="daily-icon" class="" />
-
+          <img class="daily-icon" />
           <h3 class="imperial daily-high"></h3>
-          <span class="imperial">°F</span>
+          <span class="imperial daily-high">°F</span>
           <h3 class="metric daily-high"></h3>
-          <span class="metric">°C </span>
-
+          <span class="metric daily-high">°C</span>
           <h3 class="imperial daily-low"></h3>
-          <span class="imperial">°F</span>
+          <span class="imperial daily-low">°F</span>
           <h3 class="metric daily-low"></h3>
-          <span class="metric">°C</span>
+          <span class="metric daily-low">°C</span>
         </div>
         <div id="day3">
           <h2 class="day"></h2>
-
-          <img id="daily-icon" class="" />
-
+          <img class="daily-icon" />
           <h3 class="imperial daily-high"></h3>
-          <span class="imperial">°F</span>
+          <span class="imperial daily-high">°F</span>
           <h3 class="metric daily-high"></h3>
-          <span class="metric">°C </span>
-
+          <span class="metric daily-high">°C</span>
           <h3 class="imperial daily-low"></h3>
-          <span class="imperial">°F</span>
+          <span class="imperial daily-low">°F</span>
           <h3 class="metric daily-low"></h3>
-          <span class="metric">°C</span>
+          <span class="metric daily-low">°C</span>
         </div>
         <div id="day4">
           <h2 class="day"></h2>
-
-          <img id="daily-icon" class="" />
-
+          <img class="daily-icon" />
           <h3 class="imperial daily-high"></h3>
-          <span class="imperial">°F</span>
+          <span class="imperial daily-high">°F</span>
           <h3 class="metric daily-high"></h3>
-          <span class="metric">°C </span>
-
+          <span class="metric daily-high">°C</span>
           <h3 class="imperial daily-low"></h3>
-          <span class="imperial">°F</span>
+          <span class="imperial daily-low">°F</span>
           <h3 class="metric daily-low"></h3>
-          <span class="metric">°C</span>
+          <span class="metric daily-low">°C</span>
         </div>
         <div id="day5">
           <h2 class="day"></h2>
-
-          <img id="daily-icon" class="" />
-
+          <img class="daily-icon" />
           <h3 class="imperial daily-high"></h3>
-          <span class="imperial">°F</span>
+          <span class="imperial daily-high">°F</span>
           <h3 class="metric daily-high"></h3>
-          <span class="metric">°C </span>
-
+          <span class="metric daily-high">°C</span>
           <h3 class="imperial daily-low"></h3>
-          <span class="imperial">°F</span>
+          <span class="imperial daily-low">°F</span>
           <h3 class="metric daily-low"></h3>
-          <span class="metric">°C</span>
+          <span class="metric daily-low">°C</span>
         </div>
       </div>
     </div>
