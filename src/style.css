@@ -19,7 +19,7 @@ body {
   justify-content: center;
   flex-direction: column;
   color: rgb(211, 211, 211);
-  overflow: scroll;
+  overflow: auto;
   text-shadow: 2px 0 4px black;
 }
 
@@ -138,7 +138,7 @@ form {
 
 #daily-weather-container {
   display: grid;
-  overflow: scroll;
+  overflow: auto;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr;
   gap: 10px;
