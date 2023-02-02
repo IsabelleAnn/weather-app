@@ -3,7 +3,6 @@ import { fetchWeatherData } from "./apiCalls.js";
 
 export async function getForecast(userInputLocation) {
   let data = await fetchWeatherData(userInputLocation);
-  console.log("original data", data);
   if (data) {
     let forecast = processWeatherData(data);
     return forecast;

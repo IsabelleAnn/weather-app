@@ -112,7 +112,6 @@ function displayForecast(forecast) {
 }
 
 function displayCurrentForecast(forecast) {
-  console.log(forecast);
   const currentTempI = document.getElementById("current-temp-i");
   const currentTempM = document.getElementById("current-temp-m");
   const currentWindI = document.getElementById("current-wind-i");

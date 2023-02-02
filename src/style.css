@@ -142,7 +142,6 @@ form {
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr;
   gap: 10px;
-  margin: 10px;
 }
 #day1,
 #day2,
