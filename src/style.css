@@ -13,6 +13,7 @@
 body {
   font-family: "Signika", sans-serif;
   height: 100vh;
+  padding: 30px 0px;
   background-color: rgb(27, 27, 27);
   display: flex;
   align-items: center;
@@ -37,13 +38,12 @@ input::placeholder {
   opacity: 15%;
 }
 #header-container {
-  height: 6vh;
+  height: 6%;
   width: 50%;
   text-align: center;
   display: grid;
   grid-template-columns: 50px 1fr;
   align-items: flex-start;
-  margin-top: 20px;
 }
 form {
   justify-self: flex-end;
@@ -61,9 +61,8 @@ form {
 
 #container {
   border-radius: 50%;
-  height: 94vh;
+  height: 94%;
   width: 50%;
-  margin-bottom: 20px;
 
   background-repeat: no-repeat;
   background-position-x: center;
