@@ -21,7 +21,6 @@ body {
   flex-direction: column;
   color: rgb(211, 211, 211);
   text-shadow: 2px 0 4px black;
-  overflow: hidden;
 }
 
 button {
@@ -140,7 +139,6 @@ form {
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr;
   gap: 10px;
-  overflow: hidden;
 }
 #day1,
 #day2,
