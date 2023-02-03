@@ -207,27 +207,27 @@ function getMin(data) {
 function getBackgroundImgSrc(skies, icon) {
   let url;
   if (icon === "50d" || icon === "50n") {
-    url = `url(../dist/images/${getImageRandomImgName("mist")})`;
+    url = `url('../dist/images/${getImageRandomImgName("mist")}')`;
 
     return url;
   }
   if (skies === "Snow") {
-    url = `url(../dist/images/${getImageRandomImgName("snow")})`;
+    url = `url('../dist/images/${getImageRandomImgName("snow")}')`;
 
     return url;
   }
   if (skies === "Thunderstorm" || skies === "Drizzle" || skies === "Rain") {
-    url = `url(../dist/images/${getImageRandomImgName("rain")})`;
+    url = `url('../dist/images/${getImageRandomImgName("rain")}')`;
 
     return url;
   }
   if (skies === "Clear") {
-    url = `url(../dist/images/${getImageRandomImgName("clear")})`;
+    url = `url('../dist/images/${getImageRandomImgName("clear")}')`;
 
     return url;
   }
   if (skies === "Clouds") {
-    url = `url(../dist/images/${getImageRandomImgName("clouds")})`;
+    url = `url('../dist/images/${getImageRandomImgName("clouds")}')`;
 
     return url;
   }
