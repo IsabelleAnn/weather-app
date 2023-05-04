@@ -22,7 +22,7 @@ body {
 }
 .content-container {
   margin-top: 10px;
-  width: 70%;
+  max-width: 1024px;
   display: flex;
   flex-direction: column;
 }
