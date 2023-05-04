@@ -20,12 +20,14 @@ body {
   color: var(--offwhite);
   text-shadow: 2px 0 4px black;
 }
+
 .content-container {
   margin-top: 10px;
   max-width: 1024px;
   display: flex;
   flex-direction: column;
 }
+
 @media screen and (max-width: 600px) {
   .content-container {
     width: 100%;
