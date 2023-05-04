@@ -22,7 +22,7 @@ const errorMsg = document.getElementById("error");
 const unitBtn = document.getElementById("unit-btn");
 const fBtn = document.getElementById("f-unit-btn");
 const cBtn = document.getElementById("c-unit-btn");
-const backgroundImgDiv = document.getElementById("container");
+const backgroundImgDiv = document.getElementById("main-container");
 let forecast = {};
 
 let imperials;
@@ -168,10 +168,11 @@ function displayDailyForecast(forecast) {
 
     let maxTemps = getMax(forecast.hourly[`day${dayCount}`]);
     let minTemps = getMin(forecast.hourly[`day${dayCount}`]);
-    day.children[2].textContent = maxTemps[0];
-    day.children[4].textContent = maxTemps[1];
-    day.children[6].textContent = minTemps[0];
-    day.children[8].textContent = minTemps[1];
+    console.log(day.children);
+    day.children[2].children[0].textContent = maxTemps[0];
+    day.children[2].children[2].textContent = maxTemps[1];
+    day.children[3].children[0].textContent = minTemps[0];
+    day.children[3].children[2].textContent = minTemps[1];
     dayCount++;
   });
 }
