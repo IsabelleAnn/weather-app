@@ -16,19 +16,19 @@
 body {
   color: var(--offblack);
   background: var(--offblack);
-  /* text-shadow: 2px 0 4px black; */
 }
 
 .selected {
   font-weight: 700;
   font-size: 1.2rem !important;
   color: white;
-  /* color: rgba(211, 211, 211); */
 }
+
 .hidden {
   display: none;
 }
 /* Header Section ***************************************************************/
+
 header {
   width: 100%;
   display: flex;
@@ -62,6 +62,7 @@ button {
   font-size: 0;
   padding: 0;
 }
+
 div#unit-btn:hover {
   background-color: #3b3b3b4f;
 }
@@ -75,6 +76,7 @@ input {
   border-bottom: 2px solid rgba(211, 211, 211, 0.151);
   width: 200px;
 }
+
 input::placeholder {
   opacity: 15%;
   text-align: center;
@@ -86,7 +88,12 @@ input::placeholder {
   color: rgb(255, 110, 110);
 }
 
+.fa-magnifying-glass:hover {
+  color: #ec6e4c;
+}
+
 /* Main Section ***************************************************************/
+
 main {
   background-repeat: no-repeat;
   background-position-x: center;
@@ -107,6 +114,7 @@ main {
 #current-city {
   font-size: 3rem;
 }
+
 .left-data-container,
 .right-data-container {
   background-color: var(--transparent-white);
@@ -114,6 +122,7 @@ main {
   border-radius: var(--radius);
 }
 /* Main - Current Weather Data ***************************************************************/
+
 .primary-current-weather {
   display: flex;
   flex-direction: column;
@@ -135,24 +144,29 @@ main {
   align-items: center;
   justify-content: center;
 }
+
 #icon-temperature-container .imperial,
 #icon-temperature-container .metric {
   font-size: 5rem;
 }
+
 .secondary-current-weather {
   margin-top: 20px;
   font-size: 1.5rem;
 }
+
 .secondary-current-weather h2 {
   margin-bottom: 10px;
 }
+
 .secondary-current-weather .current-weather {
   text-align: center;
 }
+
 /* Main - Daily Data ***************************************************************/
+
 #daily-weather-container {
   display: flex;
-
   flex-direction: column;
 }
 
@@ -172,8 +186,7 @@ main {
 .day {
   font-size: 2rem;
 }
-.daily-icon {
-}
+
 .daily-high {
   font-size: 1.3rem;
   font-weight: bold;
@@ -183,9 +196,15 @@ main {
   font-weight: normal;
 }
 
+span.imperial.daily-high {
+  padding-right: 10px;
+}
+
 /* Footer Section ***************************************************************/
 footer {
   color: var(--offwhite);
+  text-align: center;
+  margin: 10px 0;
 }
 
 a:link,
@@ -194,16 +213,19 @@ a:visited {
   color: var(--offwhite);
   text-decoration: none;
 }
+
 a:hover {
   color: #ec6e4c;
   text-decoration: none;
 }
 
+/* Media Query --------------------------------------------------------- */
 @media (min-width: 875px) {
   header {
     flex-direction: row;
     height: 60px;
   }
+
   #f-unit-btn,
   #c-unit-btn,
   #location,
@@ -211,21 +233,24 @@ a:hover {
   .form-container {
     font-size: 1.5rem;
   }
+
   #unit-btn {
     margin-right: auto;
     border-radius: 10px;
   }
+
   form {
     display: flex;
     justify-content: center;
     margin-top: 0;
   }
+
   .selected {
     font-size: 1.7rem !important;
   }
 
   main {
-    padding-bottom: 60px;
+    padding-bottom: 70px;
     padding-left: 12%;
     padding-right: 12%;
   }
@@ -236,14 +261,17 @@ a:hover {
     text-align: left;
     justify-content: space-between;
   }
+
   .primary-current-weather {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .secondary-current-weather {
     margin-top: 0px;
     text-align: right;
   }
+
   #daily-weather-container {
     flex-direction: row;
     justify-content: space-between;
@@ -263,8 +291,13 @@ a:hover {
     margin-top: 20px;
     padding: 10px 2%;
   }
+
   .daily-icon {
     margin-top: -18px;
     margin-bottom: -18px;
+  }
+
+  span.imperial.daily-high {
+    padding-right: 0px;
   }
 }
