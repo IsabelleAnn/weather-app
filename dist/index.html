@@ -21,8 +21,8 @@
     </div> -->
     <header>
       <div id="unit-btn">
-        <button class="unit selected" id="f-unit-btn">°F</button>
-        <button class="unit" id="c-unit-btn">°C</button>
+        <button class="selected" id="f-unit-btn">°F</button>
+        <button id="c-unit-btn">°C</button>
       </div>
       <form>
         <div class="form-container">
@@ -37,14 +37,14 @@
     </header>
 
     <main id="main-container">
-      <div id="current-weather-container">
-        <div>
-          <div id="location-container">
+      <div id="current-weather-data">
+        <div class="left-data-container">
+          <div class="current-location">
             <p class="location-data" id="current-date"></p>
             <h1 class="location-data" id="current-city"></h1>
             <h2 class="location-data" id="current-time"></h2>
           </div>
-          <div class="current-weather-main">
+          <div class="primary-current-weather">
             <div id="icon-temperature-container">
               <img id="icon-current" class=/>
               <span class="imperial" id="current-temp-i"></span>
@@ -55,7 +55,8 @@
             <h2 id="current-skies" class="current-weather"></h2>
           </div>
         </div>
-        <div id="today-weather-data">
+        <div class="secondary-current-weather right-data-container">
+          <h2>Today's Outlook:</h2>
           <div class="current-weather">
             <span class="data-title">Feels Like: </span>
             <span class="imperial" id="feels-like-i"></span
