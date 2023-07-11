@@ -220,7 +220,22 @@ a:hover {
 }
 
 /* Media Query --------------------------------------------------------- */
-@media (min-width: 875px) {
+@media (min-width: 930px) {
+  .left-data-container,
+  .right-data-container,
+  #day1,
+  #day2,
+  #day3,
+  #day4,
+  #day5,
+  #day6 {
+    background-color: transparent;
+  }
+  #current-weather-data,
+  #daily-weather-container {
+    background-color: var(--transparent-white);
+    border-radius: var(--radius);
+  }
   header {
     flex-direction: row;
     height: 60px;
@@ -275,7 +290,6 @@ a:hover {
   #daily-weather-container {
     flex-direction: row;
     justify-content: space-between;
-    overflow: scroll;
     margin-top: 20px;
   }
 
