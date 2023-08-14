@@ -69,6 +69,8 @@ div#unit-btn:hover {
 
 form {
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 input {
